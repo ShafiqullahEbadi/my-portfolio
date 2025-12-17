@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { Button } from "./ui/button";
+import me from "Gemini_Generated_Image_o75pbso75pbso75p.png";
 
 const categories = ["All", "Graphic Design", "Motion Design", "Video Editing"];
 
@@ -12,7 +13,7 @@ const projects = [
     id: 1,
     title: "Brand Identity",
     category: "Graphic Design",
-    image: "/modern-brand-identity.png",
+    image: {me},
     description: "Complete brand system for a tech startup",
   },
   {
