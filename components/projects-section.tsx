@@ -4,7 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { Button } from "./ui/button";
-import me from "Gemini_Generated_Image_o75pbso75pbso75p.png";
+import me from "../public/Gemini_Generated_Image_o75pbso75pbso75p.png";
 
 const categories = ["All", "Graphic Design", "Motion Design", "Video Editing"];
 
