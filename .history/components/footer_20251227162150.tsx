@@ -11,7 +11,6 @@ import {
   MessageCircle,
   Instagram,
   ExternalLink,
-  Link2,
 } from "lucide-react";
 
 export default function Footer() {
@@ -30,9 +29,16 @@ export default function Footer() {
       label: "WhatsApp",
     },
     {
-      icon: Link2,
-      href: "https://linktr.ee/shafiqullah.ebadi",
-      label: "Linktree"
+      icon: ExternalLink,
+      href: "<a
+              href=""
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1 rounded-full hover:text-green-500 transition-colors"
+              aria-label="Linktree"
+            >
+              <ExternalLink size={16} />
+            </a>"
     }
   ];
 

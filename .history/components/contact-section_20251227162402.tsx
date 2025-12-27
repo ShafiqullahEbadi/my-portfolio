@@ -81,9 +81,9 @@ export default function ContactSection() {
       href: "https://wa.me/93770668357",
     },
     {
-      name: "Linktree",
-      icon: <Link2 className="w-5 h-5" />,
+      icon: Link2,
       href: "https://linktr.ee/shafiqullah.ebadi",
+      name: "Linktree",
     },
   ];
 

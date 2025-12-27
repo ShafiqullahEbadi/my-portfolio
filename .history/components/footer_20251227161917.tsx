@@ -10,8 +10,6 @@ import {
   ArrowUp,
   MessageCircle,
   Instagram,
-  ExternalLink,
-  Link2,
 } from "lucide-react";
 
 export default function Footer() {
@@ -29,11 +27,6 @@ export default function Footer() {
       href: "https://wa.me/93770668357",
       label: "WhatsApp",
     },
-    {
-      icon: Link2,
-      href: "https://linktr.ee/shafiqullah.ebadi",
-      label: "Linktree"
-    }
   ];
 
   const footerLinks = [
@@ -204,7 +197,16 @@ export default function Footer() {
               aria-label="WhatsApp"
             >
               <MessageCircle size={16} />
-            </a>            
+            </a>
+            <a
+              href="https://wa.me/93744217212"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1 rounded-full hover:text-green-500 transition-colors"
+              aria-label="WhatsApp"
+            >
+              <MessageCircle size={16} />
+            </a>
           </motion.div>
 
           {/* Copyright */}

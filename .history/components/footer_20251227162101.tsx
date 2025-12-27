@@ -11,7 +11,6 @@ import {
   MessageCircle,
   Instagram,
   ExternalLink,
-  Link2,
 } from "lucide-react";
 
 export default function Footer() {
@@ -29,11 +28,6 @@ export default function Footer() {
       href: "https://wa.me/93770668357",
       label: "WhatsApp",
     },
-    {
-      icon: Link2,
-      href: "https://linktr.ee/shafiqullah.ebadi",
-      label: "Linktree"
-    }
   ];
 
   const footerLinks = [
@@ -204,7 +198,8 @@ export default function Footer() {
               aria-label="WhatsApp"
             >
               <MessageCircle size={16} />
-            </a>            
+            </a>
+            
           </motion.div>
 
           {/* Copyright */}
