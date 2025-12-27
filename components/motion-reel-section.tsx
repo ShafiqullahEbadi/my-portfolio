@@ -23,8 +23,7 @@ export function MotionReelSection({ data }: MotionReelSectionProps) {
 
   const MotionReelCard = ({ reel }: { reel: Reel }) => {
     const ref = useRef(null);
-    const desktopVideoRef = useRef<HTMLVideoElement>(null);
-    const mobileVideoRef = useRef<HTMLVideoElement>(null);
+    const videoRef = useRef<HTMLVideoElement>(null);
     const progressRef = useRef<HTMLDivElement>(null);
 
     const [isPlaying, setIsPlaying] = useState(false);
@@ -32,21 +31,19 @@ export function MotionReelSection({ data }: MotionReelSectionProps) {
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
     const [isMuted, setIsMuted] = useState(false);
-    const [showControls, setShowControls] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [hasError, setHasError] = useState(false);
 
     const isInView = useInView(ref, { once: true, amount: 0.3 });
 
     const handleTimeUpdate = useCallback(() => {
-      const video = desktopVideoRef.current || mobileVideoRef.current;
-      if (!video) return;
-      setCurrentTime(video.currentTime);
-      setProgress((video.currentTime / (video.duration || 1)) * 100);
+      if (!videoRef.current) return;
+      setCurrentTime(videoRef.current.currentTime);
+      setProgress((videoRef.current.currentTime / (videoRef.current.duration || 1)) * 100);
     }, []);
 
     useEffect(() => {
-      const video = desktopVideoRef.current || mobileVideoRef.current;
+      const video = videoRef.current;
       if (!video) return;
 
       const handlePlay = () => setIsPlaying(true);
@@ -70,25 +67,22 @@ export function MotionReelSection({ data }: MotionReelSectionProps) {
     }, [handleTimeUpdate]);
 
     const togglePlay = () => {
-      const video = desktopVideoRef.current || mobileVideoRef.current;
-      if (!video) return;
-      if (video.paused) video.play().catch(console.error);
-      else video.pause();
+      if (!videoRef.current) return;
+      if (videoRef.current.paused) videoRef.current.play().catch(console.error);
+      else videoRef.current.pause();
     };
 
     const toggleMute = () => {
-      const video = desktopVideoRef.current || mobileVideoRef.current;
-      if (!video) return;
-      video.muted = !video.muted;
-      setIsMuted(video.muted);
+      if (!videoRef.current) return;
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
     };
 
     const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
-      const video = desktopVideoRef.current || mobileVideoRef.current;
-      if (!progressRef.current || !video) return;
+      if (!progressRef.current || !videoRef.current) return;
       const rect = progressRef.current.getBoundingClientRect();
       const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-      video.currentTime = pos * video.duration;
+      videoRef.current.currentTime = pos * videoRef.current.duration;
     };
 
     const formatTime = (time: number) => {
@@ -105,91 +99,53 @@ export function MotionReelSection({ data }: MotionReelSectionProps) {
         transition={{ duration: 0.8 }}
         className="flex flex-col"
       >
-        {/* Desktop */}
-        <div className="relative rounded-3xl overflow-hidden glass-card shadow-2xl bg-black/10 aspect-video hidden sm:block">
-          <div className="relative w-full h-full">
-            {isLoading && (
-              <div className="absolute inset-0 flex items-center justify-center bg-black/10">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-              </div>
-            )}
-            {hasError ? (
-              <div className="absolute inset-0 flex items-center justify-center bg-red-100 text-red-600">
-                Failed to load video
-              </div>
-            ) : (
-              <video
-                ref={desktopVideoRef}
-                loop
-                playsInline
-                preload="metadata"
-                className="absolute inset-0 w-full h-full object-cover cursor-pointer"
-                onClick={togglePlay}
-                onCanPlay={() => setIsLoading(false)}
-              >
-                <source src={reel.reel} type="video/mp4" />
-              </video>
-            )}
-          </div>
-
-          {/* Controls */}
-          <div
-            className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 transition-opacity duration-300 ${
-              showControls || !isPlaying ? "opacity-100" : "opacity-0"
-            }`}
-            onMouseEnter={() => setShowControls(true)}
-            onMouseLeave={() => setShowControls(false)}
+        {/* Video Card */}
+        <div className="relative rounded-2xl overflow-hidden shadow-lg bg-black">
+          <video
+            ref={videoRef}
+            loop
+            playsInline
+            preload="metadata"
+            className="w-full h-auto max-h-[400px] object-cover cursor-pointer"
+            onClick={togglePlay}
+            onCanPlay={() => setIsLoading(false)}
           >
+            <source src={reel.reel} type="video/mp4" />
+          </video>
+
+          {/* Overlay Controls */}
+          <div className="absolute bottom-8 lg:bottom-10 left-0 right-0 bg-black/50 p-2 flex flex-col space-y-2">
+            {/* Progress Bar */}
             <div
               ref={progressRef}
-              className="h-2 bg-gray-600/50 rounded-full mb-2 cursor-pointer relative"
+              className="h-2 w-full bg-gray-600/50 rounded-full cursor-pointer"
               onClick={handleProgressClick}
             >
               <div
                 className="h-full bg-blue-500 rounded-full"
                 style={{ width: `${progress}%` }}
-              ></div>
+              />
             </div>
 
+            {/* Buttons and Time */}
             <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <button
-                  onClick={togglePlay}
-                  className="text-white hover:bg-white/20 p-2 rounded-full"
-                >
+              <div className="flex items-center space-x-3">
+                <button onClick={togglePlay} className="p-1 sm:p-2 rounded-full hover:bg-white/20">
                   {isPlaying ? <Pause size={20} /> : <Play size={20} />}
                 </button>
-                <button
-                  onClick={toggleMute}
-                  className="text-white hover:bg-white/20 p-2 rounded-full"
-                >
+                <button onClick={toggleMute} className="p-1 sm:p-2 rounded-full hover:bg-white/20">
                   {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
                 </button>
-                <span className="text-sm text-white/80 font-mono">
-                  {formatTime(currentTime)} / {formatTime(duration)}
-                </span>
               </div>
+              <span className="text-xs sm:text-sm font-mono">
+                {formatTime(currentTime)} / {formatTime(duration)}
+              </span>
             </div>
           </div>
-        </div>
 
-        {/* Mobile */}
-        <div className="block sm:hidden rounded-2xl overflow-hidden shadow-lg bg-gray-100 mt-4">
-          <div className="relative w-full h-64">
-            <video
-              ref={mobileVideoRef}
-              loop
-              playsInline
-              preload="metadata"
-              className="absolute inset-0 w-full h-full object-cover"
-              onClick={togglePlay}
-              onCanPlay={() => setIsLoading(false)}
-            >
-              <source src={reel.reel} type="video/mp4" />
-            </video>
-          </div>
-          <div className="p-4">
-            <h3 className="text-lg font-bold mb-1">{reel.title}</h3>
+          {/* Title below video */}
+          <div className="p-2 bg-gray-900 text-white text-sm sm:text-base">
+            {reel.title}
           </div>
         </div>
       </motion.div>
