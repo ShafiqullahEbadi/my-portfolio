@@ -181,7 +181,6 @@ export default function ContactSection() {
                     key={link.name}
                     href={link.href}
                     target="_blank"
-                    rel="noopener noreferrer"
                     className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-100 dark:from-blue-900 to-purple-100 dark:to-purple-900 flex items-center justify-center text-xl hover:shadow-lg transition-shadow"
                     whileHover={{ scale: 1.1, rotate: 10 }}
                     whileTap={{ scale: 0.95 }}
