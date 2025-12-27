@@ -48,7 +48,7 @@ export function ProjectsSection({ data: projects }: { data: Project[] }) {
             Portfolio
           </span>
           <h2 className="text-4xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-gray-900 via-blue-800 to-purple-900 dark:from-white dark:via-blue-200 dark:to-purple-200 bg-clip-text text-transparent">
-            Selected Work
+            Graphic Design
           </h2>
 
           <div className="flex flex-wrap items-center justify-center gap-3">

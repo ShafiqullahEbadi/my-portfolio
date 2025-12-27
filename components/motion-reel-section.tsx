@@ -163,7 +163,7 @@ export function MotionReelSection({ data }: MotionReelSectionProps) {
         <span className="text-sm font-medium text-blue-600 dark:text-blue-400 tracking-widest uppercase mb-2 block">
           Showreels
         </span>
-        <h2 className="text-4xl md:text-5xl font-bold">Video Gallery</h2>
+        <h2 className="text-4xl md:text-5xl font-bold">Edited Videos & Motion Graphics</h2>
       </motion.div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
