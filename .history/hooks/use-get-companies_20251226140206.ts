@@ -1,0 +1,4 @@
+
+const useGetCompanies = async () => {
+    
+};

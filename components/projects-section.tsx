@@ -6,54 +6,20 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import me from "../public/projects/Gemini_Generated_Image_o75pbso75pbso75p.png";
 
-const categories = ["All", "Graphic Design", "Motion Design", "Video Editing"];
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  image: string;
+  company?: string;
+  technologies?: string[];
+  startDate?: string;
+  endDate?: string;
+}
 
-const projects = [
-  {
-    id: 1,
-    title: "Brand Identity",
-    category: "Graphic Design",
-    image: {me},
-    description: "Complete brand system for a tech startup",
-  },
-  {
-    id: 2,
-    title: "Motion Reel",
-    category: "Motion Design",
-    image: "/motion-graphics-abstract-shapes.jpg",
-    description: "Animated brand elements and transitions",
-  },
-  {
-    id: 3,
-    title: "Commercial Ad",
-    category: "Video Editing",
-    image: "/cinematic-commercial-video-production.jpg",
-    description: "30-second product commercial",
-  },
-  {
-    id: 4,
-    title: "Social Campaign",
-    category: "Graphic Design",
-    image: "/social-media-campaign.png",
-    description: "Multi-platform social media content",
-  },
-  {
-    id: 5,
-    title: "Title Sequence",
-    category: "Motion Design",
-    image: "/cinematic-title-sequence-design.jpg",
-    description: "Animated title sequence for documentary",
-  },
-  {
-    id: 6,
-    title: "Music Video",
-    category: "Video Editing",
-    image: "/music-video-editing-creative.jpg",
-    description: "Artistic music video production",
-  },
-];
-
-export function ProjectsSection() {
+export function ProjectsSection({ data: projects }: { data: Project[] }) {
+  const categories = ["All", ...new Set(projects.map((p) => p.category))];
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
   const [activeCategory, setActiveCategory] = useState("All");
