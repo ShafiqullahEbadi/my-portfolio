@@ -4,7 +4,6 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { Button } from "./ui/button";
-import me from "../public/projects/Gemini_Generated_Image_o75pbso75pbso75p.png";
 
 interface Project {
   id: string;
@@ -38,6 +37,7 @@ export function ProjectsSection({ data: projects }: { data: Project[] }) {
       <div className="absolute inset-0 bg-gradient-to-b from-background via-blue-500/5 to-background" />
 
       <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -69,6 +69,7 @@ export function ProjectsSection({ data: projects }: { data: Project[] }) {
           </div>
         </motion.div>
 
+        {/* Project Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProjects.map((project, index) => (
             <motion.div
@@ -76,23 +77,45 @@ export function ProjectsSection({ data: projects }: { data: Project[] }) {
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer shadow-lg hover:shadow-xl transition-shadow"
+              className="group relative cursor-pointer rounded-2xl shadow-lg hover:shadow-xl transition-shadow"
             >
-              <Image
-                src={project.image || "/placeholder.svg"}
-                alt={project.title}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                  <span className="text-xs font-medium text-blue-400 uppercase tracking-wider mb-2 block">
+              {/* Desktop / Large Screen */}
+              <div className="relative hidden sm:block aspect-[4/3] overflow-hidden rounded-2xl">
+                <Image
+                  src={project.image || "/placeholder.svg"}
+                  alt={project.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                    <span className="text-xs font-medium text-blue-400 uppercase tracking-wider mb-2 block">
+                      {project.category}
+                    </span>
+                    <h3 className="text-2xl font-bold mb-2 text-white">
+                      {project.title}
+                    </h3>
+                    <p className="text-sm text-gray-300">{project.description}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Mobile / Tablet */}
+              <div className="sm:hidden rounded-2xl overflow-hidden shadow-lg">
+                <div className="relative w-full aspect-[4/3]">
+                  <Image
+                    src={project.image || "/placeholder.svg"}
+                    alt={project.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="p-4">
+                  <span className="text-xs font-medium text-blue-400 uppercase tracking-wider mb-1 block">
                     {project.category}
                   </span>
-                  <h3 className="text-2xl font-bold mb-2 text-white">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm text-gray-300">{project.description}</p>
+                  <h3 className="text-lg font-bold mb-1">{project.title}</h3>
+                  <p className="text-sm text-gray-600">{project.description}</p>
                 </div>
               </div>
             </motion.div>
