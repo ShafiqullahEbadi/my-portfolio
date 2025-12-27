@@ -187,7 +187,7 @@ export default function Footer() {
               className="p-1 rounded-full hover:text-pink-500 transition-colors"
               aria-label="Instagram"
             >
-              <Instagram size={16} />
+              <Instagram size={16} /> {/* Replace with Instagram icon */}
             </a>
             <a
               href="https://wa.me/93744217212"

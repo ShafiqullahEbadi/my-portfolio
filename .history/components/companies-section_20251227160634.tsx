@@ -24,7 +24,7 @@ export function CompaniesSection({ data: companies }: { data: Company[] }) {
 
   return (
     <section className="py-20 bg-slate-50 dark:bg-slate-900/50 border-y border-slate-200 dark:border-slate-800 overflow-hidden">
-      <div className="max-w-7xl mx-auto mb-20 px-6 text-center">
+      <div className="max-w-7xl mx-auto px-6 mb-10 text-center">
         {/* Main Section Title */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
@@ -62,11 +62,10 @@ export function CompaniesSection({ data: companies }: { data: Company[] }) {
           {marqueeCompanies.map((company, index) => (
             <div
               key={`${company._id}-${index}`}
-              className="mx-4 sm:mx-6 lg:mx-12 flex flex-col items-center justify-center transition-all duration-300
-             opacity-100 lg:opacity-60 lg:grayscale lg:hover:opacity-100 lg:hover:grayscale-0"
+              className="mx-12 flex flex-col items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100"
             >
               {/* Logo */}
-              <div className="relative h-16 w-40 sm:h-20 sm:w-48">
+              <div className="relative h-16 w-40 sm:h-30 sm:w-65">
                 <Image
                   src={company.company_logo}
                   alt={company.company_name}

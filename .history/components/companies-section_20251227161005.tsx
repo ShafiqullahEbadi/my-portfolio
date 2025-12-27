@@ -62,11 +62,10 @@ export function CompaniesSection({ data: companies }: { data: Company[] }) {
           {marqueeCompanies.map((company, index) => (
             <div
               key={`${company._id}-${index}`}
-              className="mx-4 sm:mx-6 lg:mx-12 flex flex-col items-center justify-center transition-all duration-300
-             opacity-100 lg:opacity-60 lg:grayscale lg:hover:opacity-100 lg:hover:grayscale-0"
+              className="mx-12 flex flex-col items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 sm:opacity-100 md:opacity-60"
             >
               {/* Logo */}
-              <div className="relative h-16 w-40 sm:h-20 sm:w-48">
+              <div className="relative h-16 w-40 sm:h-30 sm:w-65">
                 <Image
                   src={company.company_logo}
                   alt={company.company_name}

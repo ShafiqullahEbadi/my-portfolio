@@ -9,7 +9,6 @@ import {
   Mail,
   ArrowUp,
   MessageCircle,
-  Instagram,
 } from "lucide-react";
 
 export default function Footer() {
@@ -75,7 +74,7 @@ export default function Footer() {
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
             >
-              {socialLinks.map((social) => (
+              {socialLinks.map((social, index) => (
                 <a
                   key={social.label}
                   href={social.href}
@@ -159,54 +158,13 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="border-t border-gray-200 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          {/* Created by with social icons */}
-          <motion.div
-            className="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400 text-center md:text-left"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-          >
-            {/* Social Icons */}
-            <span>Created by Sajjad Matin</span>
-            <a
-              href="www.linkedin.com/in/sajjad-matin-mahmodi-4308602b5"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-1 rounded-full hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-              aria-label="LinkedIn"
-            >
-              <Linkedin size={16} />
-            </a>
-            <a
-              href="https://www.instagram.com/sajjadmatinmahmodi/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-1 rounded-full hover:text-pink-500 transition-colors"
-              aria-label="Instagram"
-            >
-              <Instagram size={16} />
-            </a>
-            <a
-              href="https://wa.me/93744217212"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-1 rounded-full hover:text-green-500 transition-colors"
-              aria-label="WhatsApp"
-            >
-              <MessageCircle size={16} />
-            </a>
-          </motion.div>
-
-          {/* Copyright */}
           <motion.p
             className="text-sm text-gray-500 dark:text-gray-500 text-center md:text-left"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.4 }}
           >
             © {currentYear} Shafiqullah Ebadi. All rights reserved.
           </motion.p>

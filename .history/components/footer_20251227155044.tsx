@@ -170,7 +170,6 @@ export default function Footer() {
             transition={{ delay: 0.4 }}
           >
             {/* Social Icons */}
-            <span>Created by Sajjad Matin</span>
             <a
               href="www.linkedin.com/in/sajjad-matin-mahmodi-4308602b5"
               target="_blank"
@@ -187,7 +186,7 @@ export default function Footer() {
               className="p-1 rounded-full hover:text-pink-500 transition-colors"
               aria-label="Instagram"
             >
-              <Instagram size={16} />
+              <Instagram size={16} /> {/* Replace with Instagram icon */}
             </a>
             <a
               href="https://wa.me/93744217212"
@@ -198,6 +197,9 @@ export default function Footer() {
             >
               <MessageCircle size={16} />
             </a>
+
+            {/* Created by text */}
+            <span>Created by Sajjad Matin</span>
           </motion.div>
 
           {/* Copyright */}

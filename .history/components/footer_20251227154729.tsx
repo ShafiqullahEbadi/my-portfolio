@@ -170,9 +170,8 @@ export default function Footer() {
             transition={{ delay: 0.4 }}
           >
             {/* Social Icons */}
-            <span>Created by Sajjad Matin</span>
             <a
-              href="www.linkedin.com/in/sajjad-matin-mahmodi-4308602b5"
+              href="https://linkedin.com/in/sajjad-matin"
               target="_blank"
               rel="noopener noreferrer"
               className="p-1 rounded-full hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
@@ -181,16 +180,16 @@ export default function Footer() {
               <Linkedin size={16} />
             </a>
             <a
-              href="https://www.instagram.com/sajjadmatinmahmodi/"
+              href="https://instagram.com/your_instagram_handle"
               target="_blank"
               rel="noopener noreferrer"
               className="p-1 rounded-full hover:text-pink-500 transition-colors"
               aria-label="Instagram"
             >
-              <Instagram size={16} />
+              <Instagram size={16} /> {/* Replace with Instagram icon */}
             </a>
             <a
-              href="https://wa.me/93744217212"
+              href="https://wa.me/93770668357"
               target="_blank"
               rel="noopener noreferrer"
               className="p-1 rounded-full hover:text-green-500 transition-colors"
@@ -198,6 +197,9 @@ export default function Footer() {
             >
               <MessageCircle size={16} />
             </a>
+
+            {/* Created by text */}
+            <span>Created by Sajjad Matin</span>
           </motion.div>
 
           {/* Copyright */}
