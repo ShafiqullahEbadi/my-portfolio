@@ -66,7 +66,7 @@ export function CompaniesSection({ data: companies }: { data: Company[] }) {
              opacity-100 lg:opacity-60 lg:grayscale lg:hover:opacity-100 lg:hover:grayscale-0"
             >
               {/* Logo */}
-              <div className="relative h-40 w-40 sm:h-50 sm:w-50">
+              <div className="relative h-40 w-40 sm:h-48 sm:w-48">
                 <Image
                   src={company.company_logo}
                   alt={company.company_name}
