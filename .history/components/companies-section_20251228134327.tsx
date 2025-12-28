@@ -50,7 +50,7 @@ export function CompaniesSection({ data: companies }: { data: Company[] }) {
           initial={{ x: "100%" }}       // 👈 start from right (off-screen)
           animate={{ x: "-33.33%" }}    // 👈 move to left
           transition={{
-            duration: 100,
+            duration: 30,
             repeat: Infinity,
             ease: "linear",
           }}
