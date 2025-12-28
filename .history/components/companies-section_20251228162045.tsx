@@ -11,10 +11,8 @@ interface Company {
 
 export function CompaniesSection({ data: companies }: { data: Company[] }) {
   const companiesWithLogos = companies.filter((c) => c.company_logo);
-  if (companiesWithLogos.length === 0) return null;
 
-  // Duplicate logos to ensure seamless looping
-  const repeatedCompanies = [...companiesWithLogos, ...companiesWithLogos];
+  if (companiesWithLogos.length === 0) return null;
 
   return (
     <section className="py-20 bg-slate-50 dark:bg-slate-900/50 border-y border-slate-200 dark:border-slate-800 overflow-hidden">
@@ -27,12 +25,12 @@ export function CompaniesSection({ data: companies }: { data: Company[] }) {
         </span>
       </div>
 
-      {/* Seamless Marquee */}
-      <Marquee gradient={false} speed={40} pauseOnHover={true}>
-        {repeatedCompanies.map((company, index) => (
+      {/* Marquee */}
+      <Marquee gradient={false} speed={50} pauseOnHover={true}>
+        {companiesWithLogos.map((company) => (
           <div
-            key={`${company._id}-${index}`}
-            className="flex flex-col items-center justify-center px-4 sm:px-6"
+            key={company._id}
+            className="mx-6 flex flex-col items-center justify-center"
           >
             <div className="relative h-28 w-28 sm:h-32 sm:w-32">
               <Image
