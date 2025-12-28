@@ -70,8 +70,7 @@ export function MotionReelSection({ data }: MotionReelSectionProps) {
 
     const togglePlay = () => {
       if (!videoRef.current) return;
-      if (videoRef.current.paused)
-        videoRef.current.play().catch(console.error);
+      if (videoRef.current.paused) videoRef.current.play().catch(console.error);
       else videoRef.current.pause();
     };
 
@@ -84,7 +83,10 @@ export function MotionReelSection({ data }: MotionReelSectionProps) {
     const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
       if (!progressRef.current || !videoRef.current) return;
       const rect = progressRef.current.getBoundingClientRect();
-      const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      const pos = Math.max(
+        0,
+        Math.min(1, (e.clientX - rect.left) / rect.width)
+      );
       videoRef.current.currentTime = pos * videoRef.current.duration;
     };
 
@@ -102,61 +104,65 @@ export function MotionReelSection({ data }: MotionReelSectionProps) {
         transition={{ duration: 0.8 }}
         className="flex flex-col"
       >
-        {/* Video Container */}
-        <div className="relative rounded-2xl overflow-hidden shadow-lg bg-black flex items-center justify-center h-[400px] sm:h-[500px] lg:h-[600px]">
-          <video
-            ref={videoRef}
-            loop
-            playsInline
-            preload="metadata"
-            className="max-h-full max-w-full object-contain cursor-pointer"
+        {/* Video Card */}
+        <div className="flex flex-col rounded-2xl overflow-hidden shadow-lg bg-black">
+  {/* Video Container */}
+  <div className="relative flex items-center justify-center bg-black h-[400px] sm:h-[500px] lg:h-[600px]">
+    <video
+      ref={videoRef}
+      loop
+      playsInline
+      preload="metadata"
+      className="max-h-full max-w-full object-contain cursor-pointer"
+      onClick={togglePlay}
+      onCanPlay={() => setIsLoading(false)}
+    >
+      <source src={reel.reel} type="video/mp4" />
+    </video>
+
+    {/* Overlay Controls */}
+    <div className="absolute bottom-4 left-0 right-0 bg-black/50 p-2 flex flex-col space-y-2">
+      {/* Progress Bar */}
+      <div
+        ref={progressRef}
+        className="h-2 w-full bg-gray-600/50 rounded-full cursor-pointer"
+        onClick={handleProgressClick}
+      >
+        <div
+          className="h-full bg-blue-500 rounded-full"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
+
+      {/* Buttons and Time */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-3">
+          <button
             onClick={togglePlay}
-            onCanPlay={() => setIsLoading(false)}
+            className="p-1 sm:p-2 rounded-full hover:bg-white/20"
           >
-            <source src={reel.reel} type="video/mp4" />
-          </video>
-
-          {/* Overlay Controls */}
-          <div className="absolute bottom-4 left-0 right-0 bg-black/50 p-2 flex flex-col space-y-2">
-            {/* Progress Bar */}
-            <div
-              ref={progressRef}
-              className="h-2 w-full bg-gray-600/50 rounded-full cursor-pointer"
-              onClick={handleProgressClick}
-            >
-              <div
-                className="h-full bg-blue-500 rounded-full"
-                style={{ width: `${progress}%` }}
-              />
-            </div>
-
-            {/* Buttons and Time */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <button
-                  onClick={togglePlay}
-                  className="p-1 sm:p-2 rounded-full hover:bg-white/20"
-                >
-                  {isPlaying ? <Pause size={20} /> : <Play size={20} />}
-                </button>
-                <button
-                  onClick={toggleMute}
-                  className="p-1 sm:p-2 rounded-full hover:bg-white/20"
-                >
-                  {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
-                </button>
-              </div>
-              <span className="text-xs sm:text-sm font-mono">
-                {formatTime(currentTime)} / {formatTime(duration)}
-              </span>
-            </div>
-          </div>
+            {isPlaying ? <Pause size={20} /> : <Play size={20} />}
+          </button>
+          <button
+            onClick={toggleMute}
+            className="p-1 sm:p-2 rounded-full hover:bg-white/20"
+          >
+            {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+          </button>
         </div>
+        <span className="text-xs sm:text-sm font-mono">
+          {formatTime(currentTime)} / {formatTime(duration)}
+        </span>
+      </div>
+    </div>
+  </div>
 
-        {/* Title below video container */}
-        <div className="mt-2 p-2 bg-gray-900 text-white text-sm sm:text-base rounded-b-2xl ">
-          {reel.title}
-        </div>
+  {/* Title below video */}
+  <div className="p-2 bg-gray-900 text-white text-sm sm:text-base">
+    {reel.title}
+  </div>
+</div>
+
       </motion.div>
     );
   };

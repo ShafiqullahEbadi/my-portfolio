@@ -14,9 +14,8 @@ export function CompaniesSection({ data: companies }: { data: Company[] }) {
 
   if (companiesWithLogos.length === 0) return null;
 
-  // Duplicate enough times for seamless scroll
+  // Duplicate for smooth infinite scroll
   const marqueeCompanies = [
-    ...companiesWithLogos,
     ...companiesWithLogos,
     ...companiesWithLogos,
     ...companiesWithLogos,
@@ -48,10 +47,10 @@ export function CompaniesSection({ data: companies }: { data: Company[] }) {
       <div className="relative w-full overflow-hidden">
         <motion.div
           className="flex items-center whitespace-nowrap"
-          initial={{ x: 0 }}             // Start fully visible
-          animate={{ x: "-25%" }}        // Adjust scroll distance
+          initial={{ x: "100%" }}       // 👈 start from right (off-screen)
+          animate={{ x: "-33.33%" }}    // 👈 move to left
           transition={{
-            duration: 60,                // Scroll speed
+            duration: 100,
             repeat: Infinity,
             ease: "linear",
           }}
@@ -73,7 +72,7 @@ export function CompaniesSection({ data: companies }: { data: Company[] }) {
                 />
               </div>
 
-              {/* Company Name */}
+              {/* Name */}
               <p className="mt-2 text-center text-gray-700 dark:text-gray-300 text-sm sm:text-base">
                 {company.company_name}
               </p>

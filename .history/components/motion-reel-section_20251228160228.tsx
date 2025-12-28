@@ -39,9 +39,7 @@ export function MotionReelSection({ data }: MotionReelSectionProps) {
     const handleTimeUpdate = useCallback(() => {
       if (!videoRef.current) return;
       setCurrentTime(videoRef.current.currentTime);
-      setProgress(
-        (videoRef.current.currentTime / (videoRef.current.duration || 1)) * 100
-      );
+      setProgress((videoRef.current.currentTime / (videoRef.current.duration || 1)) * 100);
     }, []);
 
     useEffect(() => {
@@ -70,8 +68,7 @@ export function MotionReelSection({ data }: MotionReelSectionProps) {
 
     const togglePlay = () => {
       if (!videoRef.current) return;
-      if (videoRef.current.paused)
-        videoRef.current.play().catch(console.error);
+      if (videoRef.current.paused) videoRef.current.play().catch(console.error);
       else videoRef.current.pause();
     };
 
@@ -102,14 +99,14 @@ export function MotionReelSection({ data }: MotionReelSectionProps) {
         transition={{ duration: 0.8 }}
         className="flex flex-col"
       >
-        {/* Video Container */}
+        {/* Video Card */}
         <div className="relative rounded-2xl overflow-hidden shadow-lg bg-black flex items-center justify-center h-[400px] sm:h-[500px] lg:h-[600px]">
           <video
             ref={videoRef}
             loop
             playsInline
             preload="metadata"
-            className="max-h-full max-w-full object-contain cursor-pointer"
+            className="w-full h-auto max-h-[400px] object-contain cursor-pointer"
             onClick={togglePlay}
             onCanPlay={() => setIsLoading(false)}
           >
@@ -117,7 +114,7 @@ export function MotionReelSection({ data }: MotionReelSectionProps) {
           </video>
 
           {/* Overlay Controls */}
-          <div className="absolute bottom-4 left-0 right-0 bg-black/50 p-2 flex flex-col space-y-2">
+          <div className="absolute bottom-8 lg:bottom-10 left-0 right-0 bg-black/50 p-2 flex flex-col space-y-2">
             {/* Progress Bar */}
             <div
               ref={progressRef}
@@ -133,16 +130,10 @@ export function MotionReelSection({ data }: MotionReelSectionProps) {
             {/* Buttons and Time */}
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <button
-                  onClick={togglePlay}
-                  className="p-1 sm:p-2 rounded-full hover:bg-white/20"
-                >
+                <button onClick={togglePlay} className="p-1 sm:p-2 rounded-full hover:bg-white/20">
                   {isPlaying ? <Pause size={20} /> : <Play size={20} />}
                 </button>
-                <button
-                  onClick={toggleMute}
-                  className="p-1 sm:p-2 rounded-full hover:bg-white/20"
-                >
+                <button onClick={toggleMute} className="p-1 sm:p-2 rounded-full hover:bg-white/20">
                   {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
                 </button>
               </div>
@@ -151,11 +142,11 @@ export function MotionReelSection({ data }: MotionReelSectionProps) {
               </span>
             </div>
           </div>
-        </div>
 
-        {/* Title below video container */}
-        <div className="mt-2 p-2 bg-gray-900 text-white text-sm sm:text-base rounded-b-2xl ">
-          {reel.title}
+          {/* Title below video */}
+          <div className="p-2 bg-gray-900 text-white text-sm sm:text-base">
+            {reel.title}
+          </div>
         </div>
       </motion.div>
     );
@@ -172,9 +163,7 @@ export function MotionReelSection({ data }: MotionReelSectionProps) {
         <span className="text-sm font-medium text-blue-600 dark:text-blue-400 tracking-widest uppercase mb-2 block">
           Showreels
         </span>
-        <h2 className="text-4xl md:text-5xl font-bold">
-          Edited Videos & Motion Graphics
-        </h2>
+        <h2 className="text-4xl md:text-5xl font-bold">Edited Videos & Motion Graphics</h2>
       </motion.div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">

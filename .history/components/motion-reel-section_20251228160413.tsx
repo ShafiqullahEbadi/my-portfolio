@@ -154,7 +154,7 @@ export function MotionReelSection({ data }: MotionReelSectionProps) {
         </div>
 
         {/* Title below video container */}
-        <div className="mt-2 p-2 bg-gray-900 text-white text-sm sm:text-base rounded-b-2xl ">
+        <div className="mt-2 p-2 bg-gray-900 text-white text-sm sm:text-base rounded-b-2xl text-center">
           {reel.title}
         </div>
       </motion.div>
