@@ -8,8 +8,8 @@ interface Reel {
   id?: string;
   title: string;
   reel: string;
-  thumbnail: string; // ✅ ADDED
-  description?: string;
+  thumbnail: string;
+  description: string;
   orientation?: "portrait" | "landscape";
 }
 
@@ -66,7 +66,7 @@ export function MotionReelSection({ data }: Props) {
     const ref = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
 
-    const [started, setStarted] = useState(false); // ✅ NEW
+    const [started, setStarted] = useState(false);
     const [playing, setPlaying] = useState(false);
     const [muted, setMuted] = useState(true);
     const [progress, setProgress] = useState(0);
@@ -110,7 +110,7 @@ export function MotionReelSection({ data }: Props) {
       const onTimeUpdate = () => handleProgress();
       const onEnded = () => {
         setPlaying(false);
-        setStarted(false); // 🔁 back to thumbnail
+        setStarted(false);
         setProgress(0);
       };
 
@@ -137,12 +137,36 @@ export function MotionReelSection({ data }: Props) {
           ${portrait ? "aspect-[9/16]" : "aspect-video"}
         `}
       >
-        {/* TITLE */}
-        <div className="absolute top-3 left-3 right-3 z-20 bg-black/50 text-white text-xs px-3 py-1 rounded-lg">
-          {reel.title}
+        {/* TITLE + DESCRIPTION CONTAINER */}
+        <div
+          className="absolute top-3 left-3 right-3 z-20 bg-black/50 text-white text-xs px-3 py-2 rounded-lg transition-all duration-300"
+          style={{ maxHeight: showDescription ? "300px" : "40px" }}
+        >
+          <div className="font-semibold">{reel.title}</div>
+
+          {reel.description && (
+            <div
+              className="overflow-hidden transition-all duration-300 mt-2"
+              style={{ maxHeight: showDescription ? 200 : 0 }}
+            >
+              <p>{reel.description}</p>
+            </div>
+          )}
+
+          {/* BUTTON AT THE BOTTOM */}
+          {reel.description && (
+            <div className="mt-2 flex justify-end">
+              <button
+                onClick={() => setShowDescription(!showDescription)}
+                className="text-xs text-white/80 hover:text-white"
+              >
+                {showDescription ? "Show less" : "Read more"}
+              </button>
+            </div>
+          )}
         </div>
 
-        {/* THUMBNAIL (before play) */}
+        {/* THUMBNAIL */}
         {!started && (
           <div
             className="absolute inset-0 z-10 cursor-pointer"
@@ -177,7 +201,7 @@ export function MotionReelSection({ data }: Props) {
           <source src={reel.reel} type="video/mp4" />
         </video>
 
-        {/* CONTROLS (only after started) */}
+        {/* CONTROLS */}
         {started && (
           <div className="absolute bottom-3 left-3 right-3 z-20 flex flex-col gap-2 bg-black/50 p-2 rounded-lg">
             <div className="flex justify-between items-center">
@@ -206,25 +230,6 @@ export function MotionReelSection({ data }: Props) {
               className="w-full h-1 bg-gray-300 rounded-lg accent-white"
             />
           </div>
-        )}
-
-        {/* DESCRIPTION */}
-        {reel.description && (
-          <div
-            className="absolute bottom-0 left-0 right-0 bg-black/70 text-white text-sm p-3 rounded-t-lg overflow-hidden transition-all duration-300"
-            style={{ maxHeight: showDescription ? "200px" : "0" }}
-          >
-            <p>{reel.description}</p>
-          </div>
-        )}
-
-        {reel.description && (
-          <button
-            onClick={() => setShowDescription(!showDescription)}
-            className="absolute bottom-[calc(100%+10px)] left-3 z-30 bg-black/60 text-white text-xs px-3 py-1 rounded-lg"
-          >
-            {showDescription ? "Hide" : "Read more"}
-          </button>
         )}
       </motion.div>
     );
