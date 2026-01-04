@@ -255,7 +255,6 @@ export function MotionReelSection({ data }: Props) {
       <div className="space-y-16">
         {portraitVideos.length > 0 && (
           <div>
-            <h3 className="text-2xl font-semibold mb-6">Portrait Videos</h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {portraitVideos.map((reel, i) => (
                 <Card key={(reel.id || reel.title) + i} reel={reel} portrait />
@@ -266,7 +265,6 @@ export function MotionReelSection({ data }: Props) {
 
         {landscapeVideos.length > 0 && (
           <div>
-            <h3 className="text-2xl font-semibold mb-6">Landscape Videos</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {landscapeVideos.map((reel, i) => (
                 <Card
