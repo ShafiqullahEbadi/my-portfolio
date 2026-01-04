@@ -194,7 +194,7 @@ export function MotionReelSection({ data }: Props) {
           loop={false}
           muted={muted}
           playsInline
-          preload="metadata"
+          preload="auto"
           className="w-full h-full object-cover"
           onClick={togglePlay}
         >
